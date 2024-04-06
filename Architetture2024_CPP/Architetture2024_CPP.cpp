@@ -195,6 +195,7 @@ std::vector<std::pair<int, token_t>> lex(std::string program)
 			int length = i - start;
 			int number = std::stoi(program.substr(start, length));
 			result.push_back( {number, NUMBER} );
+			continue;
 		}
 		
 		switch (current())
@@ -211,6 +212,8 @@ std::vector<std::pair<int, token_t>> lex(std::string program)
 		case ')':
 			result.push_back({ current(), CLOSE_PAREN });
 			break;
+		default:
+			throw std::invalid_argument("Invalid character found.");
 		}
 		advance();
 	}
